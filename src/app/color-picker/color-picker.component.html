@@ -1,0 +1,28 @@
+<h1 mat-dialog-content> Escolha a cor</h1>
+<div mat-dialog-content style="margin-top: 15px;">
+  <div class="color-wrapper">
+    <app-color-palette
+      [hue]="hue"
+      (color)="setColor($event)"
+    ></app-color-palette>
+    <app-color-slider
+      (color)="hue=$event"
+      style="margin-left:16px"
+    ></app-color-slider>
+  </div>
+  <div class="input-wrapper" *ngFor="let color of colors">
+    <span class="text">{{color}}</span>
+    <div
+      class="color-div"
+      [ngStyle]="{'background-color': color || 'white'}"
+    ></div>
+  </div>
+</div>
+<div mat-dialog-actions style="float: right">
+  <button mat-flat-button mat-dialog-close >
+    Cancelar
+  </button>
+  <button mat-flat-button (click)="send()">
+    Ok
+  </button>
+</div>
