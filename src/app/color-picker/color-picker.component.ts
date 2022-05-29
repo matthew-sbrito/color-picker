@@ -1,10 +1,14 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
+import { Component, Inject, Input, OnInit } from '@angular/core';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-color-picker',
   templateUrl: './color-picker.component.html',
-  styleUrls: ['./color-picker.component.scss']
+  styleUrls: ['./color-picker.component.scss'],
 })
 export class ColorPickerDialog implements OnInit {
   hue: string;
@@ -14,22 +18,19 @@ export class ColorPickerDialog implements OnInit {
 
   constructor(
     private dialogRef: MatDialogRef<ColorPickerDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-  ) { }
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {}
 
   ngOnInit(): void {
-    const initialColor = [
-      'rgba(0,0,0,1)',
-      '#000000',
-    ]
+    const initialColor = ['rgba(0,0,0,1)', '#000000'];
     this.colors = this.data['colors'] || initialColor;
   }
 
   setColor(colors: string[]) {
-    this.colors = colors
+    this.colors = colors;
   }
 
   send() {
-    this.dialogRef.close(this.colors)
+    this.dialogRef.close(this.colors);
   }
 }

@@ -4,7 +4,6 @@ import {
   ElementRef,
   EventEmitter,
   HostListener,
-  OnInit,
   Output,
   ViewChild
 } from '@angular/core';
@@ -16,22 +15,21 @@ import {
 })
 export class ColorSliderComponent implements AfterViewInit {
 
-  private _ctx: CanvasRenderingContext2D;
+  private _ctx!: CanvasRenderingContext2D;
+  private _selectedHeight!: number;
   private _mousedown: boolean = false;
-  private _selectedHeight: number;
 
-  @Output()
-  color: EventEmitter<string> = new EventEmitter<string>();
+  @Output() color: EventEmitter<string> = new EventEmitter<string>();
 
-  @ViewChild('canvas')
-  canvas: ElementRef<HTMLCanvasElement>;
+  @ViewChild('canvas') canvas!: ElementRef<HTMLCanvasElement>;
 
   @HostListener('window:mouseup', ['$event'])
-  onMouseUp(event: MouseEvent){
+  onMouseUp(event: MouseEvent) {
     this._mousedown = false;
   }
 
-  constructor() { }
+  constructor() {
+  }
 
   ngAfterViewInit(): void {
     this.draw();
@@ -44,9 +42,9 @@ export class ColorSliderComponent implements AfterViewInit {
 
     const width = this.canvas.nativeElement.width;
     const height = this.canvas.nativeElement.height;
-    this._ctx.clearRect(0,0, width, height);
+    this._ctx.clearRect(0, 0, width, height);
 
-    const gradient = this._ctx.createLinearGradient(0,0,0, height);
+    const gradient = this._ctx.createLinearGradient(0, 0, 0, height);
 
     gradient.addColorStop(0, 'rgba(255, 0, 0, 1)');
     gradient.addColorStop(0.17, 'rgba(255, 255, 0, 1)');
@@ -57,7 +55,7 @@ export class ColorSliderComponent implements AfterViewInit {
     gradient.addColorStop(1, 'rgba(255, 0, 0, 1)');
 
     this._ctx.beginPath();
-    this._ctx.rect(0,0, width, height)
+    this._ctx.rect(0, 0, width, height)
     this._ctx.fillStyle = gradient;
     this._ctx.fill();
     this._ctx.closePath();
@@ -73,7 +71,7 @@ export class ColorSliderComponent implements AfterViewInit {
   }
 
   onMouseMove(event: MouseEvent) {
-    if(this._mousedown) {
+    if (this._mousedown) {
       this._selectedHeight = event.offsetY;
       this.draw();
       this.emitColor(event.offsetX, event.offsetY)
@@ -93,7 +91,7 @@ export class ColorSliderComponent implements AfterViewInit {
   }
 
   private getColorAtPosition(offsetX: number, offsetY: number) {
-    const imageData = this._ctx.getImageData(offsetX, offsetY, 1,1).data;
+    const imageData = this._ctx.getImageData(offsetX, offsetY, 1, 1).data;
     return `rgba(${imageData[0]},${imageData[1]},${imageData[2]},1)`;
   }
 }
