@@ -18,27 +18,30 @@ import {
 })
 export class ColorPaletteComponent implements AfterViewInit, OnChanges {
 
-  private _ctx: CanvasRenderingContext2D
+  private _ctx!: CanvasRenderingContext2D
   private _mousedown: boolean = false
-  public _selectedPosition: { x: number; y: number }
+  public _selectedPosition!: { x: number; y: number }
 
   @Input()
-  hue: string
+  hue!: string
 
   @Output()
   color: EventEmitter<string[]> = new EventEmitter<string[]>()
 
   @ViewChild('canvas')
-  canvas: ElementRef<HTMLCanvasElement>
+  canvas!: ElementRef<HTMLCanvasElement>
 
   ngAfterViewInit() {
     this.draw()
   }
 
   draw() {
+    if(!this.canvas) return
+
     if (!this._ctx) {
       this._ctx = this.canvas.nativeElement.getContext('2d')!;
     }
+
     const width = this.canvas.nativeElement.width
     const height = this.canvas.nativeElement.height
 

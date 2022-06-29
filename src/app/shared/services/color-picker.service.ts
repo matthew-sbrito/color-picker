@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ColorPickerDialog } from './color-picker.component';
+import { ColorPickerDialog } from '../../color-picker/color-picker.component';
 
 @Injectable({
   providedIn: 'root',

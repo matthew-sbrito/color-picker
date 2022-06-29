@@ -1,16 +1,16 @@
 import {Component, OnInit} from '@angular/core';
-import {ColorPickerService} from "./color-picker/color-picker.service";
+import {ColorPickerService} from "./shared/services/color-picker.service";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   title = 'color-picker';
 
   constructor(
-    private colorPicker: ColorPickerService
+    private colorPicker: ColorPickerService,
   ) { }
 
   openColorPicker() {
@@ -18,6 +18,5 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    console.log(this.colorPicker)
   }
 }
